@@ -1,0 +1,354 @@
+AllCops:
+  TargetRubyVersion: 2.6.3
+  Exclude:
+    - 'db/**/*'
+    - 'bin/*'
+    - 'config/initializers/*'
+    - 'config/environments/*'
+    - 'vendor/**/*'
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - 'Rakefile'
+    - 'Guardfile'
+    - 'lib/tasks/auto_annotate_models.rake'
+
+# === METRICS =================================================================================== #
+
+# Commonly used screens these days easily fit more than 80 characters.
+Metrics/LineLength:
+  Max: 100
+
+# The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
+Metrics/ClassLength:
+  Max: 100
+  Exclude:
+    - 'spec/**/*'
+
+# Avoid writing of large modules
+Metrics/ModuleLength:
+  Max: 100
+
+# Avoid excessive block nesting
+Metrics/BlockNesting:
+  Max: 3
+  Exclude:
+    - 'spec/**/*'
+
+# Create separate methods/services to be used within block
+Metrics/BlockLength:
+  Max:             3
+  Exclude:
+    - 'spec/**/*'
+    - 'config/initializers/**/*'
+    - 'config/routes.rb'
+  ExcludedMethods:
+    - included
+    - class_methods
+    - class_eval
+    - define_method
+    - instance_eval
+
+# Avoid parameter lists longer than three or four parameters
+# https://github.com/bbatsov/ruby-style-guide#too-many-params
+Metrics/ParameterLists:
+  Max: 4
+
+
+# === LAYOUT ==================================================================================== #
+
+# Most readable form.
+Layout/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle:      table
+
+# Add empty line after all guard clauses
+Layout/EmptyLineAfterGuardClause:
+  Enabled: true
+
+# Check space around operators
+Layout/SpaceAroundOperators:
+  Enabled: true
+
+# This cop checks for extra/unnecessary whitespace
+Layout/ExtraSpacing:
+  ForceEqualSignAlignment: true
+
+# Method chains are indented with 2 spaces
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle:    indented
+  IndentationWidth: 2
+
+# Multi-line expressions with operators are indented with 2 spaces
+Layout/MultilineOperationIndentation:
+  EnforcedStyle:    indented
+  IndentationWidth: 2
+
+# Check if tabulations throughout the project are the same: 2 spaces
+Layout/Tab:
+  IndentationWidth: 2
+
+# Order of building models
+Layout/ClassStructure:
+  Enabled: true
+  Include:
+    - 'app/models/**/*'
+    - 'lib/models/**/*'
+  Categories:
+    modules:
+      - extend
+      - include
+      - prepend
+    macroses:
+      - acts_as_token_authenticatable
+      - acts_as_tenant
+      - devise
+      - rolify
+      - scopify
+      - resourcify
+    associations:
+      - belongs_to
+      - has_one
+      - has_many
+      - has_one_attached
+      - has_many_attached
+    nested_attributes:
+      - accepts_nested_attributes_for
+    validations:
+      - validates
+      - validates_uniqueness_to_tenant
+      - validate
+    hooks:
+      - before_validation
+      - before_save
+      - before_create
+      - before_update
+      - before_destroy
+      - after_validation
+      - after_save
+      - after_create
+      - after_update
+      - after_destroy
+    attributes:
+      - attr_accessor
+      - attr_reader
+      - attr_writer
+      - enum
+    delegations:
+      - delegate
+    scopes:
+      - scope
+  ExpectedOrder:
+    - modules
+    - constants
+    - macroses
+    - associations
+    - nested_attributes
+    - validations
+    - hooks
+    - attributes
+    - delegations
+    - scopes
+    - public_class_methods
+    - initializer
+    - public_methods
+    - protected_methods
+    - private_methods
+
+
+# === LINT ====================================================================================== #
+
+# Suppressing exceptions can be perfectly fine, and be it to avoid to
+# explicitly type nil into the rescue since that's what you want to return,
+# or suppressing LoadError for optional dependencies
+Lint/HandleExceptions:
+  Enabled: false
+
+# Don't use assignment in conditions
+Lint/AssignmentInCondition:
+  AllowSafeAssignment: false
+
+# This cop checks for ambiguous operators in the first argument of a method invocation without parentheses.
+Lint/AmbiguousOperator:
+  Enabled: false
+
+# Shadowing outer local variables with block parameters is often useful
+# to not reinvent a new name for the same thing, it highlights the relation
+# between the outer variable and the parameter. The cases where it's actually
+# confusing are rare, and usually bad for other reasons already, for example
+# because the method is too long.
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+
+# There are valid cases, for example debugging Cucumber steps,
+# also they'll fail CI anyway. Then add those files to exclude
+Lint/Debugger:
+  Enabled: true
+
+# Inherit errors from StandardError is more typical than from RuntimeError
+Lint/InheritException:
+  EnforcedStyle: standard_error
+
+# === NAMING ==================================================================================== #
+
+# Forbid short names for block arguments
+Naming/UncommunicativeBlockParamName:
+  AllowNamesEndingInNumbers: false
+  ForbiddenNames:
+    - a
+    - b
+    - c
+    - k
+    - i
+    - j
+
+# Forbid short names for method arguments
+Naming/UncommunicativeMethodParamName:
+  MinNameLength:             1
+  AllowNamesEndingInNumbers: false
+  ForbiddenNames:
+    - a
+    - b
+    - c
+    - k
+    - i
+    - j
+
+# Forbid numbers in variable names
+Naming/VariableNumber:
+  EnforcedStyle: non_integer
+
+# Same name of instance variable and memoization method
+Naming/MemoizedInstanceVariableName:
+  Exclude:
+    - 'app/*/concerns/**/*.rb'
+
+# === STYLE ===================================================================================== #
+
+# Allow private to be inlined in method definitions.
+Style/AccessModifierDeclarations:
+  Enabled: false
+
+# We do not need to support Ruby 1.9, so this is good to use.
+Style/SymbolArray:
+  Enabled: true
+
+# Mixing the styles looks just silly.
+Style/HashSyntax:
+  EnforcedStyle: ruby19_no_mixed_keys
+
+# String#% is by far the least verbose and only object oriented variant.
+Style/FormatString:
+  EnforcedStyle: percent
+
+# This cop enforces the use of consistent method names from the Enumerable module
+Style/CollectionMethods:
+  Enabled: true
+
+# Either allow this style or don't. Marking it as safe with parenthesis
+# is silly. Let's try to live without them for now.
+Style/ParenthesesAroundCondition:
+  AllowSafeAssignment: false
+
+# A specialized exception class will take one or more arguments and construct the message from it.
+# So both variants make sense.
+Style/RaiseArgs:
+  Enabled: false
+
+# Fail is an alias of raise. Avoid aliases, it's more cognitive load for no gain.
+# The argument that fail should be used to abort the program is wrong too,
+# there's Kernel#abort for that.
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+# do / end blocks should be used for side effects,
+# methods that run a block for side effects and have
+# a useful return value are rare, assign the return
+# value to a local variable for those cases.
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+# Big numbers with underscore started from one thousand
+Style/NumericLiterals:
+  Exclude:
+    - 'config/initializers/**/*'
+    - 'config/puma.rb'
+    - 'config.ru'
+  MinDigits: 4
+
+# This cop enforces consistency between 'return nil' and 'return'
+Style/ReturnNil:
+  Enabled: true
+
+# This cop checks for the use of strings as keys in hashes. The use of symbols is preferred instead
+Style/StringHashKeys:
+  Enabled: true
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*'
+    - 'config/**/*'
+    - 'config.ru'
+  IgnoredMethods:
+    - load
+    - puts
+    - raise
+    - redirect_to
+    - render_to_string
+    - redirect_back
+    - render
+    - respond_with
+    - render_with_message
+    - respond_with_errors
+    - head
+    - respond_as_html
+    - respond_as_json
+    - respond_as_paginated_json
+    - require
+    - acts_as_token_authentication_handler_for
+    - require_relative
+    - javascript_include_tag
+    - stylesheet_link_tag
+    - render_wizard
+    - redirect_back
+    - send_data
+
+# Enforcing the names of variables? To single letter ones? Just no.
+Style/SingleLineBlockParams:
+  Enabled: false
+
+# Check with yard instead.
+Style/Documentation:
+  Enabled: false
+
+# Style preference
+Style/MethodDefParentheses:
+  Enabled: false
+
+# Frozen Literals
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+
+# Quotes
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+# Allow us to use `alias_method` in class body
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
+# Allow us to use empty `case`
+Style/EmptyCaseCondition:
+  Enabled: false
+
+# Prefer `call` over `.()` shortcut
+Style/LambdaCall:
+  EnforcedStyle: call
+
+# Prefer `%r{}` over `//`. It better plays with slashes
+Style/RegexpLiteral:
+  EnforcedStyle: percent_r
+
+# Wrap complex conditions in ternary expressions with parentheses
+Style/TernaryParentheses:
+  EnforcedStyle: require_parentheses_when_complex
