@@ -18,10 +18,11 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'rubocop-rails'
 gem 'devise'
-
+gem 'omniauth-github'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails'
 end
 
 group :development do
