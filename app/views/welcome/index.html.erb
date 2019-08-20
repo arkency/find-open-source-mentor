@@ -1,2 +1,10 @@
 <h1>A platform to connect junior developers with open source projects</h1>
 <p>First task: make this app work:)</p>
+
+<div>
+  <% if user_signed_in? %>
+    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+  <% else %>
+    <%= link_to "Sign in with Github", user_github_omniauth_authorize_path %>
+  <% end %>
+</div>
