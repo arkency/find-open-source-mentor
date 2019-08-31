@@ -2,6 +2,6 @@
 
 class DevelopersController < ApplicationController
   def index
-    @developers = Developer.all.where(junior: true)
+    @developers = Developer.all
   end
 end
