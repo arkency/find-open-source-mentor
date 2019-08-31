@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2019_08_31_163306) do
 
   create_table "developers", force: :cascade do |t|
     t.string "name"
-    t.boolean "junior", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
