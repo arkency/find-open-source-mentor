@@ -19,6 +19,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'rubocop-rails'
 gem 'devise'
 gem 'omniauth-github'
+gem "octokit", "~> 4.0"
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
