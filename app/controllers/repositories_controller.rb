@@ -2,12 +2,8 @@ class RepositoriesController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    token = request.env["omniauth.auth"]
-    @client = Octokit::Client.new(client_id: @client_id)
-    # (access_token: token)
-    # url = @client.authorize_url(@client_id, :scope => 'user:email')
-    # redirect url
-
-    @client.repos
+    @client      = Octokit::Client.new
+    @github_user = @client.user(current_user.uid)
+    @repos       = @client.repos(@github_user.login, query: { type: 'owner', sort: 'asc' })
   end
 end
