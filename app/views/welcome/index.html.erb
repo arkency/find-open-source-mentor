@@ -14,3 +14,9 @@
     <%= link_to "Sign in with Github", user_github_omniauth_authorize_path %>
   <% end %>
 </div>
+
+<div>
+  <% if user_signed_in? %>
+    <%= button_to 'Add repository', new_repository_path, method: :get %>
+  <% end %>
+</div>

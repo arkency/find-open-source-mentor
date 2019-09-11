@@ -1,0 +1,9 @@
+<div>
+  <%= 'All repos' %>
+  <% @repos.each do |repo| %>
+    <h4>
+      <%= repo.full_name %>
+      <%= link_to "Add this repo", root_path %>
+    </h4>
+  <% end %>
+</div>
