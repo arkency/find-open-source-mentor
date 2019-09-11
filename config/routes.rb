@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   resources :repositories
   root 'welcome#index'
   get 'juniors', to: 'developers#index'
+  get 'projects', to: 'projects#index'
+
+  resources :projects
 end
