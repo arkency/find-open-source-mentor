@@ -36,8 +36,8 @@ So, here the story begins...
   - `bundle install`
   - Go to https://github.com/settings/tokens and create your personal api_tokens, which are specified in .env.example
   - Create file .env in main directory (same directory where .env.example is) and specify those keys there, for example: 
-  ``` GITHUB_APP_ID=59ef67a3328f769
-      GITHUB_APP_SECRET=901d023bbe4887b96ed54cd05e64a```
+  * GITHUB_APP_ID=59ef67a3328f769
+  * GITHUB_APP_SECRET=901d023bbe4887b96ed54cd05e64a
   - run `rails db:migrate RAILS_ENV=development`
   - Start local server with `rails s` and go to localhost:3000
   - Choose issue which you want to do and comment with 'I'll take it' in it
