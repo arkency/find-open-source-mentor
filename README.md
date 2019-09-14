@@ -38,7 +38,7 @@ So, here the story begins...
   - Create file .env in main directory (same directory where .env.example is) and specify those keys there, for example: 
   * GITHUB_APP_ID=59ef67a3328f769
   * GITHUB_APP_SECRET=901d023bbe4887b96ed54cd05e64a
-  - run `rails db:migrate RAILS_ENV=development`
+  - run `rails db:create` and `rails db:migrate`
   - Start local server with `rails s` and go to localhost:3000
   - Choose issue which you want to do and comment with 'I'll take it' in it
   - Create branch `git checkout -b <add-your-new-branch-name>`
