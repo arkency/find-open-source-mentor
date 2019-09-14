@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize.tap do |user|
-      user.uid = auth.info.nickname
+      user.nickname = auth.info.nickname
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.save!
