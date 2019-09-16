@@ -1,22 +1,12 @@
-<h1>A platform to connect junior developers with open source projects</h1>
-<p>First task: make this app work:)</p>
-<div>
-  <ul>
-    <li><%= link_to "Available junior developers", juniors_path %></li>
-    <li><%= link_to "Open-source projects with mentoring available", projects_path %></li>
-  </ul>
-</div>
-
-<div>
-  <% if user_signed_in? %>
-    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign in with Github", user_github_omniauth_authorize_path %>
-  <% end %>
-</div>
-
-<div>
-  <% if user_signed_in? %>
-    <%= button_to 'Add repository', new_repository_path, method: :get %>
-  <% end %>
-</div>
+<main role="main">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Find OpenSource Mentor</h1>
+      <p class="lead text-muted">A platform to connect junior developers with open source projects</p>
+      <div class="row d-flex justify-content-center">
+        <%= button_to 'Sign up as junior', user_github_omniauth_authorize_path, method: :get, class: "btn btn-primary my-2 margin-btn" %>
+        <%= button_to 'Sign up as mentor', user_github_omniauth_authorize_path, method: :get, class: "btn btn-secondary my-2 margin-btn" %>
+      </div>
+    </div>
+  </section>
+</main>
