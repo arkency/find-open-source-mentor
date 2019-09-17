@@ -1,0 +1,6 @@
+<div class="nested-fields">
+  <div class="field">
+    <%= f.collection_select(:repository_id, repositories, :id, :link, include_blank: false) %>
+  </div>
+  <%= link_to_remove_association "remove repository", f %>
+</div>

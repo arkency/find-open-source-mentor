@@ -1,6 +1,6 @@
 <div>
   <%= 'All repos' %>
-  <% @repos.each do |repo| %>
+  <% @repositories.each do |repo| %>
     <h4>
       <%= repo.full_name %>
       <%= link_to "Add this repo", new_project_path, method: :get %>

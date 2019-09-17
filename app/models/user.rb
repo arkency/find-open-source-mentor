@@ -15,4 +15,5 @@ class User < ApplicationRecord
   end
 
   has_many :projects
+  has_many :repositories, through: :projects
 end

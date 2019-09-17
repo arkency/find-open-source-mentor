@@ -10,6 +10,9 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @client      = Octokit::Client.new
+    @github_user = @client.user(current_user.nickname)
+    @repositories = @client.repos(@github_user.login, query: { type: 'owner', sort: 'asc' })
   end
 
   def edit
@@ -55,6 +58,6 @@ class ProjectsController < ApplicationController
     end
 
     def project_params
-      params.require(:project).permit(:name)
+      params.require(:project).permit(:name, repositories_attributes: %i[id link _destroy]))
     end
 end
