@@ -11,9 +11,13 @@
     </div>
   <% end %>
 
-  <%= text_field(:project, :name) %>
+  <div class="form-group">
+    <%= form.label :name, "Project name:", class: "control-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="row d-flex justify-content-center">
+    <%= form.submit "Add Project", class: "btn btn-primary" %>
   </div>
 <% end %>
+
