@@ -1,4 +1,8 @@
-<td><%= @project.name %></td>
+<h3>Project name: </h3>
+<p><%= @project.name %></p>
+</br>
+<h3>Project description: </h3>
+<p><%= @project.description %></p>
 </br>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

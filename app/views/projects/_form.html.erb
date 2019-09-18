@@ -14,10 +14,19 @@
   <div class="form-group">
     <%= form.label :name, "Project name:", class: "control-label" %>
     <%= form.text_field :name, class: "form-control" %>
+    <%= form.label :description, "Project description:", class: "control-label" %>
+    <%= form.text_field :description, class: "form-control" %>
+
+    <!-- should be rewrite when creating project will be available only for logged in users -->
+    <% if current_user %>
+      <%= form.hidden_field :user_id, as: :hidden, value: current_user.id %>
+    <% else %>
+      <%= form.hidden_field :user_id, as: :hidden, value: 1 %>
+    <% end %>
+
   </div>
 
   <div class="row d-flex justify-content-center">
     <%= form.submit "Add Project", class: "btn btn-primary" %>
   </div>
 <% end %>
-
