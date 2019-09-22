@@ -7,10 +7,12 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody, class="row">
     <% @projects.each do |project| %>
       <tr>
-        <td><%= project.name %></td>
+        <td class="col-md-4"><%= link_to project.name, "https://github.com/#{project.user.nickname}/#{project.repository}" %></td>
+        <td><%= project.description %></td>
+        <td><%= project.user.nickname %></td>
         <td><%= link_to 'Show', project %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>

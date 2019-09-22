@@ -11,9 +11,15 @@
     </div>
   <% end %>
 
-  <div class="form-group">
+  <div class="form-group"> 
     <%= form.label :name, "Project name:", class: "control-label" %>
     <%= form.text_field :name, class: "form-control" %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :repository, "Link to repository:", class: "control-label" %>
+    <%= form.select :repository, repo, {prompt: "---Select Category---"}, {class: "form-control"} %>
   </div>
 
   <div class="row d-flex justify-content-center">
