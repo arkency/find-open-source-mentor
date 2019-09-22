@@ -22,6 +22,11 @@
     <%= form.select :repository, repo, {prompt: "---Select Category---"}, {class: "form-control"} %>
   </div>
 
+  <div class="form-group"> 
+    <%= form.label :description, "Describe the main idea of the project:", class: "control-label" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
   <div class="row d-flex justify-content-center">
     <%= form.submit "Add Project", class: "btn btn-primary" %>
   </div>
