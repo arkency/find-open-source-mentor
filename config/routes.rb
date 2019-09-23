@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   get 'projects', to: 'projects#index'
 
   resources :projects
-  resources :repositories
 
   authenticated :user do
     root 'projects#index'
