@@ -7,18 +7,30 @@ class ProjectsController < ApplicationController
     @projects = Project.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @project = Project.new
+    @repos = repos
+    @repo = repo
   end
 
-  def edit
+  def repos
+    @client      = Octokit::Client.new
+    @github_user = @client.user(current_user.nickname)
+    @repos       = @client.repos(@github_user.login, query: { type: 'owner', sort: 'asc' })
   end
+
+  def repo
+    @repos.map {|r| r.name }
+  end
+
+  def edit; end
 
   def create
     @project = Project.new(project_params)
+    @repos = repos
+    @repo = repo
 
     respond_to do |format|
       if @project.save
@@ -53,11 +65,8 @@ class ProjectsController < ApplicationController
 
   private
 
-  def set_project
-    @project = Project.find(params[:id])
-  end
 
   def project_params
-    params.require(:project).permit(:name)
+    params.require(:project).permit!
   end
 end
