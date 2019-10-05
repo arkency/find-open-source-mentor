@@ -11,7 +11,8 @@
   <% if user_signed_in? %>
     <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
   <% else %>
-    <%= link_to "Sign in with Github", user_github_omniauth_authorize_path %>
+   <p><%= link_to "Sign in as Mentor with Github ", user_github_omniauth_authorize_path(role: 'mentor') %></p>
+    <p><%= link_to "Sign in as Mentee with Github", user_github_omniauth_authorize_path(role: 'mentee') %></p>
   <% end %>
 </div>
 
