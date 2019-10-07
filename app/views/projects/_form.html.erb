@@ -11,9 +11,23 @@
     </div>
   <% end %>
 
-  <%= text_field(:project, :name) %>
+  <div class="form-group"> 
+    <%= form.label :name, "Project name:", class: "control-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.label :repository, "Link to repository:", class: "control-label" %>
+    <%= form.select :repository, repo, {prompt: "---Select Category---"}, {class: "form-control"} %>
+  </div>
+
+  <div class="form-group"> 
+    <%= form.label :description, "Describe the main idea of the project:", class: "control-label" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="row d-flex justify-content-center">
+    <%= form.submit "Add Project", class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -1,4 +1,10 @@
-<td><%= @project.name %></td>
-</br>
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<div>
+  <p><%= @project.name %></p>
+  <p><%= @project.description %></p>
+  <p><%= "by: #{@project.user.nickname}" %></p>
+  </div>
+  <div>
+    <p><%= link_to 'Edit', edit_project_path(@project) %></p>
+    <p><%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  </div>
+| <%= link_to 'Back to all projects', projects_path %>

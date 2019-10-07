@@ -2,8 +2,7 @@
 
 class User < ApplicationRecord
   ROLES = %w[mentee mentor].freeze
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable
@@ -13,12 +12,12 @@ class User < ApplicationRecord
   enum role: ROLES
 
   def self.from_omniauth(auth, params)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid      = auth.info.nickname
-      user.role     = params['role']
-      user.email    = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
+    where(email: auth.info.email).first_or_initialize.tap do |user|
+      user.nickname = auth.info.nickname
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.role = params['role']
+      user.save!
     end
   end
 end
