@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :omniauthable
          
   has_many :projects
+  
   validates :role, presence: true, inclusion: { in: ROLES }
 
   enum role: ROLES

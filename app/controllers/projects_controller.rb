@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
+  include ProjectHelper
+
   before_action :authenticate_user!
   before_action :authorize!, only: %i[edit update destroy]
-  before_action :set_project, only: %i[show edit update destroy]
+  before_action :current_project, only: %i[show edit update destroy]
+  # before_action :repo, only: %i[edit update destroy]
+  # before_action :repos, only: %i[edit update destroy]
 
   def index
     @projects = Project.all
@@ -27,7 +31,11 @@ class ProjectsController < ApplicationController
     @repos.map(&:name)
   end
 
-  def edit; end
+  def edit
+    current_project
+    @repos   = repos
+    @repo    = repo
+  end
 
   def create
     @project = Project.new(project_params)
@@ -46,14 +54,12 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
-      else
-        format.html { render :edit }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.update(project_params)
+      redirect_to project_path(@project),
+                  flash: { notice: 'Project updated.' }
+    else
+      render :edit,
+             flash: { error: @project.errors.full_messages.to_sentence }
     end
   end
 
@@ -67,7 +73,7 @@ class ProjectsController < ApplicationController
 
   private
 
-  def set_project
+  def current_project
     @project = Project.find(params[:id])
   end
 
@@ -76,6 +82,7 @@ class ProjectsController < ApplicationController
   end
 
   def authorize!
+    current_project
     authorize(@project || Project)
   end
 end

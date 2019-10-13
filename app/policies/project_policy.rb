@@ -14,6 +14,6 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def owner?
-    @record.user == @user
+    user == record.user
   end
 end
