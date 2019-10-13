@@ -4,8 +4,8 @@
       <h1 class="jumbotron-heading">Find OpenSource Mentor</h1>
       <p class="lead text-muted">A platform to connect junior developers with open source projects</p>
       <div class="row d-flex justify-content-center">
-        <%= button_to 'Sign up as junior', user_github_omniauth_authorize_path, method: :get, class: "btn btn-primary my-2 margin-btn" %>
-        <%= button_to 'Sign up as mentor', user_github_omniauth_authorize_path, method: :get, class: "btn btn-secondary my-2 margin-btn" %>
+        <%= link_to 'Sign up as mentee', user_github_omniauth_authorize_path(role: 'mentee'), method: :get, class: "btn btn-primary my-2 margin-btn" %>
+        <%= link_to 'Sign up as mentor', user_github_omniauth_authorize_path(role: 'mentor'), method: :get, class: "btn btn-secondary my-2 margin-btn" %>
       </div>
     </div>
   </section>

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :authorize!, only: %i[edit update destroy]
+  before_action :set_project, only: %i[show edit update destroy]
 
   def index
     @projects = Project.all
@@ -11,8 +13,8 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    @repos = repos
-    @repo = repo
+    @repos   = repos
+    @repo    = repo
   end
 
   def repos
@@ -22,15 +24,15 @@ class ProjectsController < ApplicationController
   end
 
   def repo
-    @repos.map {|r| r.name }
+    @repos.map(&:name)
   end
 
   def edit; end
 
   def create
     @project = Project.new(project_params)
-    @repos = repos
-    @repo = repo
+    @repos   = repos
+    @repo    = repo
 
     respond_to do |format|
       if @project.save
@@ -65,8 +67,15 @@ class ProjectsController < ApplicationController
 
   private
 
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
   def project_params
     params.require(:project).permit!
+  end
+
+  def authorize!
+    authorize(@project || Project)
   end
 end
