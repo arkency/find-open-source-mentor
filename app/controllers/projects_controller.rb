@@ -37,6 +37,12 @@ class ProjectsController < ApplicationController
     @repo    = repo
   end
 
+  def repo
+    @repos.map {|r| r.name }
+  end
+
+  def edit; end
+
   def create
     @project = Project.new(project_params)
     @repos   = repos
@@ -80,7 +86,7 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit!
   end
-
+  
   def authorize!
     current_project
     authorize(@project || Project)
