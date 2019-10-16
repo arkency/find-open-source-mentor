@@ -4,7 +4,11 @@
   <p><%= "by: #{@project.user.nickname}" %></p>
   </div>
   <div>
-    <p><%= link_to 'Edit', edit_project_path(@project) %></p>
-    <p><%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    <% if policy(@project).update? %>
+      <p><%= link_to 'Edit', edit_project_path(@project) %></p>
+    <% end %>
+    <% if policy(@project).destroy? %>
+      <p><%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    <% end %>
   </div>
 | <%= link_to 'Back to all projects', projects_path %>

@@ -22,6 +22,7 @@ gem 'rubocop-rails'
 gem 'devise'
 gem 'omniauth-github'
 gem "octokit", "~> 4.0"
+gem "pundit"
 
 group :development, :test do
   gem 'pry-rails'
