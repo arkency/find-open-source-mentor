@@ -51,5 +51,6 @@ So, here the story begins...
   - Rest a little and feel proud of yourself that you've done your first open-source contribution!
 
 ### Want to join us?
-[Join us in slack!](https://join.slack.com/t/findopensourc-prt7834/shared_invite/enQtNzQ5MTIyMzU4NTgzLTg5MGYwMTdhYWIzMGE4ZDc5ZWRlMWI1YTEyNjAzN2ZjNTc4NmMzMjI2NmYzM2U5NTEyMDI2ZTk0MGVhNWU1ZDk)
+Join us in Slack and let us know what you would like to work on (even if there's no issue for that!):
+[Join us in slack!](https://join.slack.com/t/open-source-mentor/shared_invite/enQtODAwOTkzODcxOTA1LTllODUyMzcxZTk4MmZjZWFhM2IxOTUzYTU5N2UwNmFlNDhmY2MxOGM0NjA3OTBlMzIxNTYzNGJiYzU0ODQzZjE)
 
