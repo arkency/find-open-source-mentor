@@ -6,8 +6,6 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize!, only: %i[edit update destroy]
   before_action :current_project, only: %i[show edit update destroy]
-  # before_action :repo, only: %i[edit update destroy]
-  # before_action :repos, only: %i[edit update destroy]
 
   def index
     @projects = Project.all
@@ -17,36 +15,30 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    @repos   = repos
-    @repo    = repo
+    fetch_repos
+    fetch_repo
   end
 
-  def repos
+  def fetch_repos
     @client      = Octokit::Client.new
     @github_user = @client.user(current_user.nickname)
     @repos       = @client.repos(@github_user.login, query: { type: 'owner', sort: 'asc' })
   end
 
-  def repo
-    @repos.map(&:name)
+  def fetch_repo
+    @repo = @repos.map(&:name)
   end
 
   def edit
     current_project
-    @repos   = repos
-    @repo    = repo
+    fetch_repos
+    fetch_repo
   end
-
-  def repo
-    @repos.map {|r| r.name }
-  end
-
-  def edit; end
 
   def create
     @project = Project.new(project_params)
-    @repos   = repos
-    @repo    = repo
+    fetch_repos
+    fetch_repo
 
     respond_to do |format|
       if @project.save
