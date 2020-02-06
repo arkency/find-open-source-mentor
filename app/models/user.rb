@@ -6,9 +6,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable
-         
+
   has_many :projects
-  
+  has_many :activities, as: :owner, class_name: 'PublicActivity::Activity'
+
   validates :role, presence: true, inclusion: { in: ROLES }
 
   enum role: ROLES
