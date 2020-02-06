@@ -23,6 +23,7 @@ gem 'devise'
 gem 'omniauth-github'
 gem "octokit", "~> 4.0"
 gem "pundit"
+gem 'public_activity'
 
 group :development, :test do
   gem 'pry-rails'
