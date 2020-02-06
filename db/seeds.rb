@@ -10,10 +10,12 @@
 
 default_password = '12345678'
 
-user =
-  {
-    email: 'user_0@example.com',
-    password: default_password
+User::ROLES.each do |role_name|
+  user_attributes = {
+    email: "user_#{role_name}@example.com",
+    password: default_password,
+    role: role_name
   }
-
-User.create(user)
+  user = User.create!(user_attributes)
+  puts 'Created user: ' + user.email
+end
